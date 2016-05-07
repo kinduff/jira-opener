@@ -40,9 +40,10 @@
     // Apple should pay us for this support
     if (((e.ctrlKey || e.metaKey) && e.keyCode == 13)) {
       e.preventDefault();
+      var urlPrefix = $('#url-prefix').value;
       for (var i = 0; i < matches.length; i++) {
         var issue = matches[i];
-        window.open('https://issues.dowjones.net/browse/'+issue);
+        window.open(urlPrefix + issue);
       }
     }
   }
@@ -58,12 +59,14 @@
   }
 
   function updateIssueList(issues) {
+    var urlPrefix = $('#url-prefix').value;
     $issueList.innerHTML = '';
 
     for (var i = 0; i < issues.length; i++) {
       var li = document.createElement('li');
       var a = document.createElement('a');
-      a.href = 'https://issues.dowjones.net/browse/' + issues[i];
+      a.href = urlPrefix + issues[i];
+      a.target = 'blank';
       a.appendChild(document.createTextNode(issues[i]));
       li.appendChild(a);
       $issueList.appendChild(li);

@@ -6,19 +6,23 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title JIRA Opener
     meta(property='og:title', content='JIRA Opener')
-    meta(property='og:description', content='Helps you out with the funny task to open JIRA issues one by one.')
+    meta(property='og:description', content='Helps you out with the funny task of opening JIRA issues one by one.')
     meta(property='og:url', content='http://kinduff.com/jira-opener')
     meta(property='og:image', content='/images/social.png')
-    meta(name='description', content='Easy JIRA issue opener')
+    meta(name='description', content='Helps you out with the funny task of opening JIRA issues one by one.')
     link(rel='icon', type='image/png', href='/images/favicon.png')
     link(rel='stylesheet', href='style/app.css')
   body
     .wrap
       section.header
         h1 JIRA Opener
-        p Helps you out with the funny task to open JIRA issues one by one. Just paste the text you want to parse.
+        p Helps you out with the funny task of opening JIRA issues one by one. Just paste the text you want to parse.
         p
           small Press Ctrl or CMD + Enter to open in a new tab.
+      section.options
+        ul
+          li
+            input#url-prefix(type="text", value="https://issues.dowjones.net/browse/")
       section.parser
         textarea#text(autofocus, placeholder="Paste your content here...")
         .issue-data
@@ -28,8 +32,8 @@ html
           ul#issue-list
       section.footnote
         | with 
-        span ♥ 
-        | by 
+        span ♥
+        |  by 
         a(href="http://twitter.com/kinduff" target="blank") kinduff
     script.
       // Analytics
