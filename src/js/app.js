@@ -71,6 +71,7 @@
 
   // Setup JIRA box
   $textarea.addEventListener('keyup', startJIRAThing);
+  $textarea.addEventListener('keydown', startJIRAThing);
   startJIRAThing();
 })();
 // This comment represents the end of the script
