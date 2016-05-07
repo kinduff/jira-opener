@@ -39,6 +39,7 @@
 
     // Apple should pay us for this support
     if (((e.ctrlKey || e.metaKey) && e.keyCode == 13)) {
+      e.preventDefault();
       for (var i = 0; i < matches.length; i++) {
         var issue = matches[i];
         window.open('https://issues.dowjones.net/browse/'+issue);
