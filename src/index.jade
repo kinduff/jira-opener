@@ -1,0 +1,39 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title JIRA Opener
+    meta(property='og:title', content='JIRA Opener')
+    meta(property='og:description', content='Helps you out with the funny task to open JIRA issues one by one.')
+    meta(property='og:url', content='http://kinduff.com/jira-opener')
+    meta(property='og:image', content='/images/social.png')
+    meta(name='description', content='Easy JIRA issue opener')
+    link(rel='icon', type='image/png', href='/images/favicon.png')
+    link(rel='stylesheet', href='style/app.css')
+  body
+    .wrap
+      section.header
+        h1 JIRA Opener
+        p Just paste the text you want to parse. Press Ctrl or CMD + Enter to open in a new tab.
+      section.parser
+        - var text = "BF-18 abc-123 X-88 ABCDEFGHIJKL-999 abc XY-Z-333 abcDEF-33 ABC-1"
+        textarea#text(autofocus, placeholder="Paste your content here...")
+          != text
+        .issue-data
+          #issue-count 0 issue found!
+          ul#issue-list
+      section.footnote
+        | with ♥ by 
+        a(href="http://twitter.com/kinduff") kinduff
+    script.
+      // Analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-1750020-2', 'auto');
+      ga('send', 'pageview');
+    script(src='js/app.js')

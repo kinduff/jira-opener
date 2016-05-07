@@ -1,0 +1,88 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// Fuck the things
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Lato';
+  font-size: 12pt;
+}
+
+a {
+  color: #666;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 50px 0;
+  section {
+    padding: 0 0 30px;
+
+    &.header {
+      text-align: center;
+      h1 {
+        font-size: 64px;
+        font-weight: 200;
+        margin-bottom: 15px;
+      }
+      p {
+      }
+    }
+
+    &.parser {
+      font-size: 0;
+      height: 500px;
+      textarea {
+        font-family: 'Lato';
+        border: 0;
+        outline: none;
+        width: 75%;
+        height: 100%;
+        display: inline-block;
+        border: 1px solid #ccc;
+        resize: none;
+        padding: 7px;
+        font-size: 10pt;
+        vertical-align: top;
+      }
+      .issue-data {
+        width: 25%;
+        height: 100%;
+        border: 1px solid #ccc;
+        border-left: none;
+        display: inline-block;
+        font-size: 12pt;
+        vertical-align: top;
+        padding: 7px 10px;
+
+        #issue-count {
+
+        }
+        #issue-list {
+          list-style: none;
+          padding-top: 5px;
+          li {
+            padding: 5px 0;
+          }
+        }
+      }
+    }
+
+    &.footnote {
+      padding: 0;
+      text-align: center;
+      font-size: 10pt;
+    }
+  }
+}
