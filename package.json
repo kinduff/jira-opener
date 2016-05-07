@@ -1,7 +1,7 @@
 {
   "name": "jira-opener",
   "version": "1.0.0",
-  "description": "Easy JIRA issue opener",
+  "description": "Helps you out with the funny task to open JIRA issues one by one.",
   "main": " ",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
