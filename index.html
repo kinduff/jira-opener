@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>JIRA Opener</title>
     <meta property="og:title" content="JIRA Opener">
-    <meta property="og:description" content="Helps you out with the funny task to open JIRA issues one by one.">
+    <meta property="og:description" content="Helps you out with the funny task of opening JIRA issues one by one.">
     <meta property="og:url" content="http://kinduff.com/jira-opener">
     <meta property="og:image" content="/images/social.png">
-    <meta name="description" content="Easy JIRA issue opener">
+    <meta name="description" content="Helps you out with the funny task of opening JIRA issues one by one.">
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="stylesheet" href="style/app.css">
   </head>
@@ -17,8 +17,15 @@
     <div class="wrap">
       <section class="header">
         <h1>JIRA Opener</h1>
-        <p>Helps you out with the funny task to open JIRA issues one by one. Just paste the text you want to parse.</p>
+        <p>Helps you out with the funny task of opening JIRA issues one by one. Just paste the text you want to parse.</p>
         <p><small>Press Ctrl or CMD + Enter to open in a new tab.</small></p>
+      </section>
+      <section class="options">
+        <ul>
+          <li>
+            <input id="url-prefix" type="text" value="https://issues.dowjones.net/browse/">
+          </li>
+        </ul>
       </section>
       <section class="parser">
         <textarea id="text" autofocus placeholder="Paste your content here..."></textarea>
@@ -27,7 +34,7 @@
           <ul id="issue-list"></ul>
         </div>
       </section>
-      <section class="footnote">with <span>♥ </span>by <a href="http://twitter.com/kinduff" target="blank">kinduff</a></section>
+      <section class="footnote">with <span>♥</span> by <a href="http://twitter.com/kinduff" target="blank">kinduff</a></section>
     </div>
     <script>
       // Analytics
