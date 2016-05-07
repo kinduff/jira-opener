@@ -27,8 +27,6 @@ a {
   margin: 0 auto;
   padding: 50px 0;
   section {
-    padding: 0 0 30px;
-
     &.header {
       text-align: center;
       h1 {
@@ -37,10 +35,12 @@ a {
         margin-bottom: 15px;
       }
       p {
+        margin-bottom: 10px;
       }
     }
 
     &.parser {
+      margin: 30px 0 0;
       font-size: 0;
       height: 500px;
       textarea {
@@ -66,8 +66,8 @@ a {
         vertical-align: top;
         padding: 7px 10px;
 
-        #issue-count {
-
+        .data-count {
+          font-weight: bold;
         }
         #issue-list {
           list-style: none;
