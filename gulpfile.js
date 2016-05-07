@@ -11,6 +11,10 @@ gulp.task('js', function() {
   return gulp.src([
       './src/js/app.js'
     ])
+    .pipe(plumber())
+    .pipe(uglify('app.js', {
+      compress: false
+    }))
     .pipe(gulp.dest('./dist/js'));
 });
 
