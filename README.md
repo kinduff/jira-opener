@@ -10,17 +10,25 @@ To install the project dependencies run the following npm command.
 $ npm install
 ```
 
-To run the application first build the application.
+To build the application run.
 
 ```shell
 $ gulp build
 ```
 
-And then use the serve command.
+To start the application run.
 
 ```shell
-$ serve dist
+$ gulp run
 ```
+
+To watch the application run.
+
+```shell
+$ gulp watch
+```
+
+Then run, Forrest, run!
 
 This application includes the following gulp tasks in order to automate
 
