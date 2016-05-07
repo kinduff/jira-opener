@@ -26,64 +26,87 @@ a {
   max-width: 750px;
   margin: 0 auto;
   padding: 50px 0;
+}
+
+section {
+  &.header {
+    text-align: center;
+    h1 {
+      font-size: 64px;
+      font-weight: 200;
+      margin-bottom: 15px;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+  }
+
+  &.parser {
+    margin: 30px 0 0;
+    font-size: 0;
+    height: 500px;
+    textarea {
+      font-family: 'Lato';
+      border: 0;
+      outline: none;
+      width: 75%;
+      height: 100%;
+      display: inline-block;
+      border: 1px solid #ccc;
+      resize: none;
+      padding: 7px;
+      font-size: 10pt;
+      vertical-align: top;
+    }
+    .issue-data {
+      width: 25%;
+      height: 100%;
+      border: 1px solid #ccc;
+      border-left: none;
+      display: inline-block;
+      font-size: 12pt;
+      vertical-align: top;
+      padding: 7px 10px;
+
+      .data-count {
+        font-weight: bold;
+      }
+      #issue-list {
+        list-style: none;
+        padding-top: 5px;
+        li {
+          padding: 5px 0;
+        }
+      }
+    }
+  }
+
+  &.footnote {
+    margin-top: 30px;
+    padding: 0;
+    text-align: center;
+    font-size: 10pt;
+  }
+}
+
+@media screen and (max-width: 600px) {
   section {
     &.header {
-      text-align: center;
-      h1 {
-        font-size: 64px;
-        font-weight: 200;
-        margin-bottom: 15px;
-      }
-      p {
-        margin-bottom: 10px;
-      }
+      padding: 0 15px;
     }
-
     &.parser {
-      margin: 30px 0 0;
-      font-size: 0;
-      height: 500px;
+      height: auto;
+      textarea, .issue-data {
+        width: 100%;
+        display: block;
+      }
       textarea {
-        font-family: 'Lato';
-        border: 0;
-        outline: none;
-        width: 75%;
-        height: 100%;
-        display: inline-block;
-        border: 1px solid #ccc;
-        resize: none;
-        padding: 7px;
-        font-size: 10pt;
-        vertical-align: top;
+        height: 400px;
       }
       .issue-data {
-        width: 25%;
-        height: 100%;
-        border: 1px solid #ccc;
-        border-left: none;
-        display: inline-block;
-        font-size: 12pt;
-        vertical-align: top;
-        padding: 7px 10px;
-
-        .data-count {
-          font-weight: bold;
-        }
-        #issue-list {
-          list-style: none;
-          padding-top: 5px;
-          li {
-            padding: 5px 0;
-          }
-        }
+        border-left: 1px solid #ccc;
+        border-top: 0;
       }
-    }
-
-    &.footnote {
-      margin-top: 30px;
-      padding: 0;
-      text-align: center;
-      font-size: 10pt;
     }
   }
 }
