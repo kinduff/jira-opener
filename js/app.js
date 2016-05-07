@@ -53,7 +53,7 @@
 
   // React for the poors
   function updateIssueCount(num) {
-    $issueCount.innerHTML = num + ' issues found!';
+    $issueCount.innerHTML = num;
   }
 
   function updateIssueList(issues) {
@@ -70,8 +70,7 @@
   }
 
   // Setup JIRA box
-  $textarea.addEventListener('keydown', startJIRAThing);
-  $textarea.addEventListener('onchange', startJIRAThing);
+  $textarea.addEventListener('keyup', startJIRAThing);
   startJIRAThing();
 })();
 // This comment represents the end of the script
