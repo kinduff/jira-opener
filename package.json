@@ -1,0 +1,22 @@
+{
+  "name": "jira-opener",
+  "version": "1.0.0",
+  "description": "Easy JIRA issue opener",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kinduff <abarcadabra@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.3.1",
+    "gulp-serve": "^1.2.0",
+    "gulp-uglifyjs": "^0.6.2",
+    "serve": "^1.4.0"
+  }
+}
