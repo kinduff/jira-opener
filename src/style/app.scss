@@ -61,6 +61,7 @@ section {
     .issue-data {
       width: 25%;
       height: 100%;
+      overflow-y: auto;
       border: 1px solid #ccc;
       border-left: none;
       display: inline-block;
@@ -89,7 +90,6 @@ section {
     span {
       color: #990012;
       font-size: 14pt;
-      vertical-align: middle;
     }
   }
 }
