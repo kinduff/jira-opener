@@ -41,8 +41,35 @@ section {
     }
   }
 
-  &.parser {
+  &.options {
     margin: 30px 0 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    padding: 10px;
+    ul {
+      list-style: none;
+      li {
+        display: inline-block;
+        vertical-align: middle;
+        width: 33%;
+        label {
+          font-size: 10pt;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        input {
+          width: 100%;
+          height: 100%;
+          vertical-align: middle;
+          display: inline-block;
+          font-size: 10pt;
+        }
+      }
+    }
+  }
+
+  &.parser {
     font-size: 0;
     height: 500px;
     textarea {
@@ -76,7 +103,7 @@ section {
         list-style: none;
         padding-top: 5px;
         li {
-          padding: 5px 0;
+          padding: 0 0 5px;
         }
       }
     }
