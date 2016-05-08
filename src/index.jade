@@ -8,10 +8,11 @@ html
     meta(property='og:title', content='JIRA Opener')
     meta(property='og:description', content='Helps you out with the funny task of opening JIRA issues one by one.')
     meta(property='og:url', content='http://kinduff.com/jira-opener')
-    meta(property='og:image', content='/images/social.png')
+    meta(property='og:image', content='/images/jira-opener-logo.png')
     meta(name='description', content='Helps you out with the funny task of opening JIRA issues one by one.')
     link(rel='icon', type='image/png', href='/images/favicon.png')
-    link(rel='stylesheet', href='style/app.css')
+    link(rel='stylesheet', href='style/app.css')    
+    meta(name='theme-color', content='#ffffff')
   body
     .wrap
       section.header
@@ -31,10 +32,14 @@ html
             |  issue found!
           ul#issue-list
       section.footnote
-        | with 
-        span ♥
-        |  by 
-        a(href="http://twitter.com/kinduff" target="blank") kinduff
+        p
+          | with 
+          span ♥
+          |  by 
+          a(href="http://twitter.com/kinduff" target="blank") kinduff
+        br
+        p
+          img(src="/images/jira-opener-logo.png", width=100)
     script.
       // Analytics
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
