@@ -18,11 +18,11 @@ html
         h1 JIRA Opener
         p Helps you out with the funny task of opening JIRA issues one by one. Just paste the text you want to parse.
         p
-          small Press Ctrl or CMD + Enter to open in a new tab.
+          small Enter the JIRA url - should end with a slash - and press Ctrl or CMD + Enter to open in a new tab.
       section.options
         ul
           li
-            input#url-prefix(type="text", value="https://issues.dowjones.net/browse/", placeholder="JIRA URL")
+            input#url-prefix(type="text", placeholder="JIRA URL")
       section.parser
         textarea#text(autofocus, placeholder="Paste your content here...")
         .issue-data
