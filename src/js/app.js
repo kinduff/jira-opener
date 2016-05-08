@@ -34,7 +34,10 @@
   JiraOpener.prototype = {
     // Naming functions like a boss
     startJIRAThing: function(e) {
-      this.issues = findAndParseIssues($textarea.value);
+      var issues = findAndParseIssues($textarea.value);
+      this.issues = issues.filter(function(val, i, self) {
+        return self.indexOf(val) === i;
+      });
       this.updateIssueData();
 
       if (this.issues.length < 1) {
