@@ -45,3 +45,6 @@ This application includes the following gulp tasks.
 - **jade**: Uses Jade to process `app/src/*.jade` to `app/dist`.
 - **deploy**: Uses `gulp-gh-pages` npm library to deploy `dist` content to Github pages (it builds first!)
 - **watch**: Runs corresponding task for supported action.
+
+## License
+Written with ♥ by [kinduff](http://twitter.com/kinduff). Licensed under the [MIT License](LICENSE).
