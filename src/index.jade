@@ -19,11 +19,11 @@ html
         h1 JIRA Opener
         p Helps you out with the funny task of opening JIRA issues one by one. Just paste the text you want to parse.
         p
-          small Enter the JIRA url - should end with a slash - and press Ctrl or CMD + Enter to open in a new tab.
+          small Enter the JIRA domain and press Ctrl or CMD + Enter to open in a new tab.
       section.options
         ul
           li
-            input#url-prefix(type="url", placeholder="JIRA URL")
+            input#domain(type="url", placeholder="JIRA URL")
           li
             label(for="filter-unique")
               input#filter-unique(type="checkbox")
