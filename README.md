@@ -4,7 +4,7 @@
 
 Small tool I wrote during a Friday night because I hate to open multiple JIRA issues from e-mails or annoying Slack messages. Basically it helps you out with the funny task of opening JIRA issues one by one.
 
-[See it in action](kinduff.com/jira-opener)
+[See it in action](http://kinduff.com/jira-opener)
 
 ## Install
 
