@@ -49,23 +49,27 @@ section {
     padding: 10px;
     ul {
       list-style: none;
+      font-size: 0;
       li {
         display: inline-block;
         vertical-align: middle;
-        width: 33%;
-        label {
-          font-size: 10pt;
-          display: inline-block;
-          vertical-align: middle;
-        }
-        input {
-          width: 100%;
-          height: 100%;
-          vertical-align: middle;
-          display: inline-block;
-          font-size: 10pt;
-        }
+        width: 50%;
+        font-size: 10pt;
       }
+    }
+    input[type="url"] {
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      display: inline-block;
+      font-size: 10pt;
+      padding: 7px;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    label {
+      padding-left: 10px;
     }
   }
 
@@ -123,9 +127,23 @@ section {
 }
 
 @media screen and (max-width: 600px) {
+  .hide-mobile {
+    display: none;
+  }
   section {
     &.header {
       padding: 0 15px;
+    }
+    &.options {
+      ul {
+        li {
+          width: 100%;
+          padding: 10px 0;
+          label {
+            padding: 0;
+          }
+        }
+      }
     }
     &.parser {
       height: auto;
@@ -134,7 +152,7 @@ section {
         display: block;
       }
       textarea {
-        height: 400px;
+        height: 300px;
       }
       .issue-data {
         border-left: 1px solid #ccc;

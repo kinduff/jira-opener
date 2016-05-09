@@ -8,6 +8,7 @@
   var $issueList = $('#issue-list');
   var $issueCount = $('#issue-count');
   var $urlPrefix = $('#url-prefix');
+  var $filterUnique = $('#filter-unique');
 
 
   // IT BEGINS!
@@ -15,16 +16,18 @@
     // Properties
     this.issues = [];
     this.issueCount = 0;
-    this.urlPrefix = urlPrefix || '';
 
-    // Configure
+    // Options
+    this.urlPrefix = '';
+    this.filterUnique = true;
+
     this.setOptions();
-    this.updateFieldOptions();
 
     // Setup JIRA box
     $textarea.addEventListener('keyup', this.startJIRAThing.bind(this));
     $textarea.addEventListener('keydown', this.startJIRAThing.bind(this));
     $urlPrefix.addEventListener('keyup', this.updateOptions.bind(this));
+    $filterUnique.addEventListener('change', this.updateOptions.bind(this));
   }
 
   //
@@ -34,10 +37,14 @@
   JiraOpener.prototype = {
     // Naming functions like a boss
     startJIRAThing: function(e) {
-      var issues = findAndParseIssues($textarea.value);
-      this.issues = issues.filter(function(val, i, self) {
-        return self.indexOf(val) === i;
-      });
+      this.issues = findAndParseIssues($textarea.value);
+
+      if (this.filterUnique) {
+        this.issues = this.issues.filter(function(val, i, self) {
+          return self.indexOf(val) === i;
+        });
+      }
+
       this.updateIssueData();
 
       if (this.issues.length < 1) {
@@ -96,20 +103,35 @@
     },
 
     updateOptions: function() {
-      var urlPrefix = $urlPrefix.value;
-      localStorage.urlPrefix = urlPrefix;
-      this.setOptions();
+      // urlPrefix
+      var url = $urlPrefix.value;
+      localStorage.urlPrefix = url;
+      this.urlPrefix = url;
+      updateQueryStringParam('urlPrefix', url);
+
+      // filterUnique
+      var unique = $filterUnique.checked;
+      localStorage.filterUnique = unique;
+      this.filterUnique = unique;
+      updateQueryStringParam('filterUnique', unique);
+
       this.startJIRAThing();
     },
 
     setOptions: function() {
-      this.urlPrefix = localStorage.urlPrefix || null;
-    },
+      // urlPrefix
+      var url = getParameterByName('urlPrefix') || localStorage.urlPrefix || '';
+      this.urlPrefix = url;
+      $urlPrefix.value = url;
+      updateQueryStringParam('urlPrefix', url);
 
-    updateFieldOptions: function() {
-      $urlPrefix.value = this.urlPrefix;
+      // filterUnique
+      var unique = getParameterByName('filterUnique') == null ? localStorage.filterUnique : getParameterByName('filterUnique');
+      unique = !(unique === 'false'); // true is default
+      this.filterUnique = unique;
+      $filterUnique.checked = unique;
+      updateQueryStringParam('filterUnique', unique);
     }
-
   };
 
   //
@@ -136,8 +158,39 @@
     return result.reverse();
   }
 
+  // Grabbed from http://stackoverflow.com/a/901144
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
+  // Grabbed from https://gist.github.com/excalq/2961415
+  function updateQueryStringParam(key, value) {
+    var baseUrl = [location.protocol, '//', location.host, location.pathname].join(''),
+        urlQueryString = document.location.search,
+        newParam = key + '=' + value,
+        params = '?' + newParam;
+
+    // If the "search" string exists, then build params from it
+    if (urlQueryString) {
+        keyRegex = new RegExp('([\?&])' + key + '[^&]*');
+
+        // If param exists already, update it
+        if (urlQueryString.match(keyRegex) !== null) {
+            params = urlQueryString.replace(keyRegex, "$1" + newParam);
+        } else { // Otherwise, add it to end of query string
+            params = urlQueryString + '&' + newParam;
+        }
+    }
+    window.history.replaceState({}, "", baseUrl + params);
+  };
+
   // On init...
   var Jira = new JiraOpener();
-  Jira.startJIRAThing();
 })();
 // This comment represents the end of the script
