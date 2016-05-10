@@ -7,9 +7,9 @@
   var $textarea = $('#text');
   var $issueList = $('#issue-list');
   var $issueCount = $('#issue-count');
-  var $urlPrefix = $('#url-prefix');
+  var $domain = $('#domain');
   var $filterUnique = $('#filter-unique');
-
+  var url = '';
 
   // IT BEGINS!
   var JiraOpener = function(urlPrefix) {
@@ -18,7 +18,7 @@
     this.issueCount = 0;
 
     // Options
-    this.urlPrefix = '';
+    this.domain = '';
     this.filterUnique = true;
 
     this.setOptions();
@@ -26,7 +26,7 @@
     // Setup JIRA box
     $textarea.addEventListener('keyup', this.startJIRAThing.bind(this));
     $textarea.addEventListener('keydown', this.startJIRAThing.bind(this));
-    $urlPrefix.addEventListener('keyup', this.updateOptions.bind(this));
+    $domain.addEventListener('keyup', this.updateOptions.bind(this));
     $filterUnique.addEventListener('change', this.updateOptions.bind(this));
   }
 
@@ -51,6 +51,8 @@
         return;
       }
 
+      this.url = getJiraUrl(this.domain);
+
       // Apple should pay us for this support
       if (e && ((e.ctrlKey || e.metaKey) && e.keyCode == 13)) {
         e.preventDefault();
@@ -60,14 +62,14 @@
 
     // Pokemon
     openThemAll: function() {
-      if (!this.urlPrefix) {
+      if (!this.domain) {
         return;
       }
 
       var issues = this.issues;
       for (var i = 0; i < issues.length; i++) {
         var issue = issues[i];
-        window.open(this.urlPrefix + issue);
+        window.open(this.url + issue);
       }
     },
 
@@ -88,9 +90,9 @@
       for (var i = 0; i < issues.length; i++) {
         var li = document.createElement('li');
 
-        if (this.urlPrefix) {
+        if (this.domain) {
           var a = document.createElement('a');
-          a.href = this.urlPrefix + issues[i];
+          a.href = this.url + issues[i];
           a.target = 'blank';
           a.appendChild(document.createTextNode(issues[i]));
           li.appendChild(a);
@@ -104,10 +106,9 @@
 
     updateOptions: function() {
       // urlPrefix
-      var url = $urlPrefix.value;
-      localStorage.urlPrefix = url;
-      this.urlPrefix = url;
-      updateQueryStringParam('urlPrefix', url);
+      this.domain = $domain.value;
+      localStorage.domain = this.domain;
+      updateQueryStringParam('domain', this.domain);
 
       // filterUnique
       var unique = $filterUnique.checked;
@@ -119,11 +120,10 @@
     },
 
     setOptions: function() {
-      // urlPrefix
-      var url = getParameterByName('urlPrefix') || localStorage.urlPrefix || '';
-      this.urlPrefix = url;
-      $urlPrefix.value = url;
-      updateQueryStringParam('urlPrefix', url);
+
+      this.domain = getParameterByName('domain') || localStorage.domain || '';
+      $domain.value = this.domain;
+      updateQueryStringParam('domain', this.domain);
 
       // filterUnique
       var unique = getParameterByName('filterUnique') == null ? localStorage.filterUnique : getParameterByName('filterUnique');
@@ -189,6 +189,10 @@
     }
     window.history.replaceState({}, "", baseUrl + params);
   };
+
+  function getJiraUrl(domain) {
+    return "https://issues." + domain + ".net/browse/";
+  }
 
   // On init...
   var Jira = new JiraOpener();
