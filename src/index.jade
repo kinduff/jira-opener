@@ -20,7 +20,6 @@ html
           section.options
             ul
               li.logo
-                img(src="/jira-opener/images/favicon.png")
                 h1 JIRA Opener
               li
                 input#url-prefix(type="url", placeholder="JIRA URL: https://issues.domain.net/browse")
@@ -32,6 +31,7 @@ html
               .column.left
                 .editor#text(autofocus, placeholder="Paste your content here...", contenteditable="true")
                 .editor#result
+                  |Same content above will appear here, but with JIRA tickets converted to links
               .column.right
                 .issue-data
                   .data-count

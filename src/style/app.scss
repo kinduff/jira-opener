@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css?family=Patua+One|Lato:100,300';
+@import 'https://fonts.googleapis.com/css?family=Poppins|Lato:100,300';
 
 $gray: #ccc;
 
@@ -101,13 +101,10 @@ section {
         width: 33.3%;
         font-size: 10pt;
         &.logo {
-          font-family: 'Anonymous Pro', monospace;
+          font-family: 'Poppins', monospace;
           font-size: 22px;
-          img {
-            width: 30px;
-            vertical-align: middle;
-            margin: 0 10px 0 0;
-            float: left;
+          h1 {
+            line-height: 0;
           }
         }
         &.note {
@@ -202,7 +199,6 @@ section {
             padding: 0;
           }
           &.logo {
-            width: 100% !important;
             text-align: center;
             margin-right: 0;
           }

@@ -34,8 +34,6 @@
         _this.openThemAll();
       }
     });
-
-    _this.startJIRAThing();
   }
 
   //
