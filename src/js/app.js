@@ -112,7 +112,7 @@
             if (curPrefix != nextPrefix) {
               li.className = "spacer";
               curColor = colors[curColorInt + 1];
-              curColorInt = (curColorInt + 1) % colors.length;
+              curColorInt = (curColorInt + 1) % (colors.length - 1);
             }
           }
 
