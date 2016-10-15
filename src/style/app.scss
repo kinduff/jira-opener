@@ -1,3 +1,7 @@
+@import 'https://fonts.googleapis.com/css?family=Patua+One|Lato:100,300';
+
+$gray: #ccc;
+
 html {
   box-sizing: border-box;
 }
@@ -5,7 +9,6 @@ html {
   box-sizing: inherit;
 }
 
-// Fuck the things
 * {
   margin: 0;
   padding: 0;
@@ -21,40 +24,89 @@ a {
   color: #666;
 }
 
+[contentEditable=true]:empty:not(:focus)::before {
+  content: attr(placeholder);
+  display: block; /* For Firefox */
+}
+
 .wrap {
   width: 100%;
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 50px 0 30px;
+  height: 100vh;
+}
+
+.flexbox-parent {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+.flexbox-item-grow {
+  flex: 1;
+}
+
+.fill-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+.fill-area-content {
+  overflow: auto;
+}
+
+.footer {
+  font-family: 'Lato';
+  font-size: 10pt;
+  text-align: right;
+  padding: 3px 5px;
+}
+
+.flexer {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  box-sizing: border-box;
+  border: 1px solid $gray;
+  &.left {
+    max-width: 75%;
+    height: 100%;
+    border-right: 0;
+  }
+  &.right {
+    max-width: 25%;
+    height: 100%;
+  }
 }
 
 section {
-  &.header {
-    text-align: center;
-    h1 {
-      font-size: 48pt;
-      font-weight: 200;
-      margin-bottom: 15px;
-    }
-    p {
-      margin-bottom: 10px;
-    }
-  }
-
   &.options {
-    margin: 30px 0 0;
+    margin: 0 0 0;
     width: 100%;
-    border: 1px solid #ccc;
+    height: 100%;
+    border: 1px solid $gray;
     border-bottom: 0;
-    padding: 10px;
+    padding: 15px;
     ul {
       list-style: none;
       font-size: 0;
       li {
         display: inline-block;
         vertical-align: middle;
-        width: 50%;
+        width: 33.3%;
         font-size: 10pt;
+        &.logo {
+          font-family: 'Anonymous Pro', monospace;
+          font-size: 22px;
+        }
+        &.note {
+          text-align: right;
+        }
       }
     }
     input[type="url"] {
@@ -62,8 +114,9 @@ section {
       height: 100%;
       vertical-align: middle;
       display: inline-block;
-      font-size: 10pt;
+      font-size: 12pt;
       padding: 7px;
+      border: 1px solid $gray;
     }
     input[type="checkbox"] {
       margin-right: 10px;
@@ -75,65 +128,65 @@ section {
 
   &.parser {
     font-size: 0;
-    height: 500px;
-    textarea {
+    height: 100%;
+    .editor {
       font-family: 'Lato';
       border: 0;
       outline: none;
-      width: 75%;
-      height: 100%;
+      width: 100%;
+      height: 50%;
+      max-height: 50%;
       display: inline-block;
-      border: 1px solid #ccc;
       resize: none;
       padding: 7px;
-      font-size: 10pt;
-      vertical-align: top;
+      font-size: 16px;
+      a {
+        color: #3498DB;
+      }
+    }
+    #result {
+      border-top: 1px solid $gray;
     }
     .issue-data {
-      width: 25%;
+      width: 100%;
       height: 100%;
-      overflow-y: auto;
-      border: 1px solid #ccc;
-      border-left: none;
-      display: inline-block;
       font-size: 12pt;
-      vertical-align: top;
-      padding: 7px 10px;
-
       .data-count {
         font-weight: bold;
+        padding: 14px 7px;
+        text-align: center;
+        padding: 10px 0;
+        background-color: #e4e4e4;
       }
       #issue-list {
         list-style: none;
-        padding-top: 5px;
         li {
-          padding: 0 0 5px;
+          font-size: 18px;
+          border-bottom: 1px solid #FFF;
+          &:hover {
+            opacity: 0.8;
+          }
+          a {
+            padding: 7px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: #FFF;
+            text-decoration: none;
+          }
+          &.spacer {
+          }
         }
       }
-    }
-  }
-
-  &.footnote {
-    margin-top: 30px;
-    padding: 0;
-    text-align: center;
-    font-size: 10pt;
-    span {
-      color: #990012;
-      font-size: 14pt;
-      vertical-align: middle;
     }
   }
 }
 
 @media screen and (max-width: 600px) {
   .hide-mobile {
-    display: none;
+    display: none !important;
   }
   section {
-    &.header {
-      padding: 0 15px;
-    }
     &.options {
       ul {
         li {
@@ -142,21 +195,12 @@ section {
           label {
             padding: 0;
           }
+          &.logo {
+            width: 100% !important;
+            text-align: center;
+            margin-right: 0;
+          }
         }
-      }
-    }
-    &.parser {
-      height: auto;
-      textarea, .issue-data {
-        width: 100%;
-        display: block;
-      }
-      textarea {
-        height: 300px;
-      }
-      .issue-data {
-        border-left: 1px solid #ccc;
-        border-top: 0;
       }
     }
   }

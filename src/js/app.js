@@ -5,29 +5,37 @@
 
   // Elements
   var $textarea = $('#text');
+  var $result = $('#result');
   var $issueList = $('#issue-list');
   var $issueCount = $('#issue-count');
   var $urlPrefix = $('#url-prefix');
-  var $filterUnique = $('#filter-unique');
 
 
   // IT BEGINS!
   var JiraOpener = function(urlPrefix) {
+    var _this = this;
+
     // Properties
-    this.issues = [];
-    this.issueCount = 0;
+    _this.issues = [];
+    _this.issueCount = 0;
 
     // Options
-    this.urlPrefix = '';
-    this.filterUnique = true;
+    _this.urlPrefix = '';
 
-    this.setOptions();
+    _this.setOptions();
 
     // Setup JIRA box
-    $textarea.addEventListener('keyup', this.startJIRAThing.bind(this));
-    $textarea.addEventListener('keydown', this.startJIRAThing.bind(this));
-    $urlPrefix.addEventListener('keyup', this.updateOptions.bind(this));
-    $filterUnique.addEventListener('change', this.updateOptions.bind(this));
+    $textarea.addEventListener('keyup', _this.startJIRAThing.bind(this));
+    $textarea.addEventListener('keydown', _this.startJIRAThing.bind(this));
+    $urlPrefix.addEventListener('keyup', _this.updateOptions.bind(this));
+    document.addEventListener('keydown', function(e) {
+      if (e && ((e.ctrlKey || e.metaKey) && e.keyCode == 13)) {
+        e.preventDefault();
+        _this.openThemAll();
+      }
+    });
+
+    _this.startJIRAThing();
   }
 
   //
@@ -37,24 +45,16 @@
   JiraOpener.prototype = {
     // Naming functions like a boss
     startJIRAThing: function(e) {
-      this.issues = findAndParseIssues($textarea.value);
+      this.issues = findAndParseIssues($textarea.textContent);
 
-      if (this.filterUnique) {
-        this.issues = this.issues.filter(function(val, i, self) {
-          return self.indexOf(val) === i;
-        });
-      }
+      this.issues = this.issues.filter(function(val, i, self) {
+        return self.indexOf(val) === i;
+      });
 
       this.updateIssueData();
 
       if (this.issues.length < 1) {
         return;
-      }
-
-      // Apple should pay us for this support
-      if (e && ((e.ctrlKey || e.metaKey) && e.keyCode == 13)) {
-        e.preventDefault();
-        this.openThemAll();
       }
     },
 
@@ -67,7 +67,7 @@
       var issues = this.issues;
       for (var i = 0; i < issues.length; i++) {
         var issue = issues[i];
-        window.open(this.urlPrefix + issue);
+        window.open(this.urlPrefix + '/' + issue);
       }
     },
 
@@ -82,23 +82,60 @@
     },
 
     updateIssueList: function() {
+      var colors = ["#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
+      var curColorInt = 0;
+      var curColor = colors[curColorInt];
       var issues = this.issues;
       $issueList.innerHTML = '';
+
+      var replaceObj = new Object();
+      $result.innerHTML = $textarea.innerHTML;
 
       for (var i = 0; i < issues.length; i++) {
         var li = document.createElement('li');
 
         if (this.urlPrefix) {
+          var cur = issues[i];
+
           var a = document.createElement('a');
-          a.href = this.urlPrefix + issues[i];
+          var url = this.urlPrefix + '/' + cur;
+
+          li.style.backgroundColor = curColor;
+
+          // Compares current with next one in order
+          // to separate the sorted array of issues
+          var next = issues[i + 1];
+          if (next) {
+            var curPrefix = cur.split('-')[0];
+            var nextPrefix = next.split('-')[0];
+
+            if (curPrefix != nextPrefix) {
+              li.className = "spacer";
+              curColor = colors[curColorInt + 1];
+              curColorInt = (curColorInt + 1) % colors.length;
+            }
+          }
+
+          a.href = url;
           a.target = 'blank';
           a.appendChild(document.createTextNode(issues[i]));
+
           li.appendChild(a);
+
+          // Converts content with links
+          replaceObj[cur] = '<a href="'+ url +'" target="blank">' + cur + '</a>';
         } else {
           li.appendChild(document.createTextNode(issues[i]));
         }
 
         $issueList.appendChild(li);
+      }
+      var replaceObjKeys = Object.keys(replaceObj);
+      if (replaceObjKeys.length > 0) {
+        var re = new RegExp(replaceObjKeys.join("|"),"gi");
+        $result.innerHTML = $result.innerHTML.replace(re, function(matched){
+          return replaceObj[matched];
+        });
       }
     },
 
@@ -108,14 +145,6 @@
       localStorage.urlPrefix = url;
       this.urlPrefix = url;
       updateQueryStringParam('urlPrefix', url);
-
-      // filterUnique
-      var unique = $filterUnique.checked;
-      localStorage.filterUnique = unique;
-      this.filterUnique = unique;
-      updateQueryStringParam('filterUnique', unique);
-
-      this.startJIRAThing();
     },
 
     setOptions: function() {
@@ -124,13 +153,6 @@
       this.urlPrefix = url;
       $urlPrefix.value = url;
       updateQueryStringParam('urlPrefix', url);
-
-      // filterUnique
-      var unique = getParameterByName('filterUnique') == null ? localStorage.filterUnique : getParameterByName('filterUnique');
-      unique = !(unique === 'false'); // true is default
-      this.filterUnique = unique;
-      $filterUnique.checked = unique;
-      updateQueryStringParam('filterUnique', unique);
     }
   };
 
@@ -155,7 +177,7 @@
     for (var i = 0; i < matches.length; i++) {
       result[i] = reverse(matches[i]);
     }
-    return result.reverse();
+    return result.reverse().sort();
   }
 
   // Grabbed from http://stackoverflow.com/a/901144
@@ -188,7 +210,7 @@
         }
     }
     window.history.replaceState({}, "", baseUrl + params);
-  };
+  }
 
   // On init...
   var Jira = new JiraOpener();
