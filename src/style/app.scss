@@ -103,6 +103,12 @@ section {
         &.logo {
           font-family: 'Anonymous Pro', monospace;
           font-size: 22px;
+          img {
+            width: 30px;
+            vertical-align: middle;
+            margin: 0 10px 0 0;
+            float: left;
+          }
         }
         &.note {
           text-align: right;
