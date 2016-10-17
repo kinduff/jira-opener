@@ -37,18 +37,18 @@ gulp.task('images', ['clean_images'], function() {
 });
 
 gulp.task('jade', function() {
-  return gulp.src('./src/*.jade')
+  return gulp.src('./src/views/*.jade')
     .pipe(plumber())
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('watch', function() {
   gulp.watch('src/style/*.scss', ['css']);
   gulp.watch('src/js/*.js', ['js']);
-  gulp.watch('src/*.jade', ['jade']);
+  gulp.watch('src/**/*.jade', ['jade']);
   gulp.watch('src/images/**/*', ['images']);
 });
 

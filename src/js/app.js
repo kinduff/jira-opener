@@ -10,6 +10,9 @@
   var $issueCount = $('#issue-count');
   var $urlPrefix = $('#url-prefix');
 
+  // Vars
+  var colors = ["#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
+
 
   // IT BEGINS!
   var JiraOpener = function(urlPrefix) {
@@ -43,7 +46,7 @@
   JiraOpener.prototype = {
     // Naming functions like a boss
     startJIRAThing: function(e) {
-      this.issues = findAndParseIssues($textarea.textContent);
+      this.issues = findAndParseIssues($textarea.value);
 
       this.issues = this.issues.filter(function(val, i, self) {
         return self.indexOf(val) === i;
@@ -80,14 +83,13 @@
     },
 
     updateIssueList: function() {
-      var colors = ["#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"];
       var curColorInt = 0;
       var curColor = colors[curColorInt];
       var issues = this.issues;
       $issueList.innerHTML = '';
 
       var replaceObj = new Object();
-      $result.innerHTML = $textarea.innerHTML;
+      $result.innerHTML = $textarea.value;
 
       for (var i = 0; i < issues.length; i++) {
         var li = document.createElement('li');
@@ -130,10 +132,10 @@
       }
       var replaceObjKeys = Object.keys(replaceObj);
       if (replaceObjKeys.length > 0) {
-        var re = new RegExp(replaceObjKeys.join("|"),"gi");
+        var re = new RegExp("\\b"+replaceObjKeys.join("\\b|\\b"), "gi");
         $result.innerHTML = $result.innerHTML.replace(re, function(matched){
           return replaceObj[matched];
-        });
+        }).replace(/\r\n|\r|\n/g,"<br />");
       }
     },
 

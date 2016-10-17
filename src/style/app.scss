@@ -58,13 +58,6 @@ a {
   overflow: auto;
 }
 
-.footer {
-  font-family: 'Lato';
-  font-size: 10pt;
-  text-align: right;
-  padding: 3px 5px;
-}
-
 .flexer {
   display: flex;
 }
@@ -201,6 +194,9 @@ section {
           &.logo {
             text-align: center;
             margin-right: 0;
+            h1 {
+              line-height: 1;
+            }
           }
         }
       }

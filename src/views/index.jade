@@ -29,17 +29,15 @@ html
           .fill-area-content.flexbox-item-grow
             section.parser.flexer
               .column.left
-                .editor#text(autofocus, placeholder="Paste your content here...", contenteditable="true")
+                textarea.editor#text(autofocus="true", placeholder="Paste any content here.")
                 .editor#result
-                  |Same content above will appear here, but with JIRA tickets converted to links
+                  |Same content above will appear here, but with JIRA tickets converted to links.
               .column.right
                 .issue-data
                   .data-count
                     span#issue-count 0
                     |  issue found!
                   ul#issue-list
-        .flexbox-item.footer
-          | This project is maintained by <a href="http://kinduff.com"/>kinduff</a>
 
     script.
       // Analytics
