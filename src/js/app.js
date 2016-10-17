@@ -89,7 +89,12 @@
       $issueList.innerHTML = '';
 
       var replaceObj = new Object();
-      $result.innerHTML = $textarea.value;
+
+      if ($textarea.value.length > 0) {
+        $result.innerHTML = $textarea.value;
+      } else {
+        $result.innerHTML = $result.dataset.placeholder;
+      }
 
       for (var i = 0; i < issues.length; i++) {
         var li = document.createElement('li');
