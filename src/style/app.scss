@@ -104,6 +104,22 @@ section {
           text-align: right;
         }
       }
+
+      &.menu {
+        text-align: right;
+        li {
+          display: inline-block;
+          border: 1px solid #333;
+          text-align: center;
+          width: 25%;
+          margin: 0 15px;
+          a {
+            display: block;
+            text-decoration: none;
+            padding: 10px 0;
+          }
+        }
+      }
     }
     input[type="url"] {
       width: 100%;
@@ -185,6 +201,12 @@ section {
   section {
     &.options {
       ul {
+        &.menu {
+          text-align: center;
+          li {
+            width: 40%;
+          }
+        }
         li {
           width: 100%;
           padding: 10px 0;

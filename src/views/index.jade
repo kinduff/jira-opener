@@ -23,8 +23,12 @@ html
                 h1 JIRA Opener
               li
                 input#url-prefix(type="url", placeholder="JIRA URL: https://issues.domain.net/browse")
-              li.note.hide-mobile
-                p Ctrl/Cmd + Enter to open all
+              li
+                ul.menu
+                  li
+                    a.action(href="#", data-action="open-new-tabs") Open all in new tabs
+                  li
+                    a.action(href="#", data-action="open-search") Open in search (jql)
         .flexbox-item.fill-area.content.flexbox-item-grow
           .fill-area-content.flexbox-item-grow
             section.parser.flexer

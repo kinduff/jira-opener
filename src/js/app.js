@@ -31,12 +31,29 @@
     $textarea.addEventListener('keyup', _this.startJIRAThing.bind(this));
     $textarea.addEventListener('keydown', _this.startJIRAThing.bind(this));
     $urlPrefix.addEventListener('keyup', _this.updateOptions.bind(this));
+
+    // Cmd/Ctrl + Enter
     document.addEventListener('keydown', function(e) {
       if (e && ((e.ctrlKey || e.metaKey) && e.keyCode == 13)) {
         e.preventDefault();
         _this.openThemAll();
       }
     });
+
+    // Menu actions
+    document.body.onclick = function(e) {
+      e = window.event ? event.srcElement : e.target;
+      if (e.className && e.className.indexOf('action') != -1) {
+        switch (e.dataset.action) {
+          case "open-new-tabs":
+            _this.openThemAll();
+            break;
+          case "open-search":
+            _this.openJQLSearch(_this.issues);
+            break;
+        }
+      }
+    }
   }
 
   //
@@ -70,6 +87,25 @@
         var issue = issues[i];
         window.open(this.urlPrefix + '/' + issue);
       }
+    },
+
+    // Open using JQL
+    openJQLSearch: function(issueArr) {
+      if (!this.urlPrefix || issueArr.length < 1) {
+        return;
+      }
+
+      // If JIRA doesn't find 1 issue, it doesn't display the rest
+      var searchQuery = "key in (" + issueArr.join(', ') + ")";
+
+      // Since using /browse as a required prefix, now I need to
+      // support with or without it. Highfive!
+      var prefix = this.urlPrefix;
+      if (prefix.indexOf('/browse') != -1) {
+        prefix = prefix.replace('/browse', '/issues');
+      }
+
+      window.open(prefix + '/?jql=' + searchQuery);
     },
 
     // React for the poors
