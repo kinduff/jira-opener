@@ -111,12 +111,12 @@ section {
           display: inline-block;
           border: 1px solid #333;
           text-align: center;
-          width: 25%;
+          width: auto;
           margin: 0 15px;
           a {
             display: block;
             text-decoration: none;
-            padding: 10px 0;
+            padding: 10px 10px;
           }
         }
       }
