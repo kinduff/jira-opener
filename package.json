@@ -17,6 +17,6 @@
     "gulp-sass": "^2.3.1",
     "gulp-serve": "^1.2.0",
     "gulp-uglifyjs": "^0.6.2",
-    "serve": "^1.4.0"
+    "serve": "^11.3.0"
   }
 }
